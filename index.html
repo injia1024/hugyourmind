@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>心靈綠洲 - 莫蘭迪沉浸式紓壓空間</title>
+  <title>心靈綠洲 - 靜謐沉浸式紓壓空間</title>
   <style>
-    /* --- 莫蘭迪米色系主色調 (Morandi Palette) --- */
+    /* --- 靜謐柔和大地色系 (Warm Earth Palette) --- */
     :root {
       --bg-color: #f7f4ef;         /* 暖米色背景 */
       --card-bg: #ffffff;         /* 純白卡片 */
       --inner-bg: #efece6;        /* 淺米灰內塊 */
-      --text-color: #4a453e;       /* 深深灰褐（溫和不刺眼） */
-      --sub-text: #8c857b;        /* 莫蘭迪灰褐 */
-      --primary-color: #738a81;    /* 莫蘭迪鼠尾草綠 */
+      --text-color: #4a453e;       /* 深深灰褐 */
+      --sub-text: #8c857b;        /* 柔和灰褐 */
+      --primary-color: #738a81;    /* 鼠尾草綠 */
       --primary-hover: #5d726a;   /* 深鼠尾草綠 */
-      --accent-color: #d39e82;     /* 莫蘭迪暖陶粉 */
+      --accent-color: #d39e82;     /* 暖陶粉 */
       --border-color: #e3ded6;     /* 柔和邊框 */
       --card-shadow: rgba(120, 110, 95, 0.08);
       --card-hover-shadow: rgba(115, 138, 129, 0.18);
     }
 
     [data-theme="dark"] {
-      --bg-color: #2b302d;         /* 深莫蘭迪綠灰 */
-      --card-bg: #373e3a;         /* 石墨灰綠 */
+      --bg-color: #2b302d;         /* 深綠灰 */
+      --card-bg: #373e3a;         /* 石墨綠 */
       --inner-bg: #232825;        /* 暗夜內塊 */
       --text-color: #e5e2dc;       /* 米白文字 */
       --sub-text: #a39e95;        /* 淺灰褐 */
@@ -43,7 +43,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 24px 16px;
+      padding: 20px 16px;
       transition: background-color 0.4s, color 0.4s;
     }
 
@@ -53,196 +53,178 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
-    .header-title h1 { font-size: 1.8rem; color: var(--primary-color); font-weight: 700; letter-spacing: 0.5px; }
-    .header-title p { font-size: 0.88rem; color: var(--sub-text); margin-top: 2px; }
+    .header-title h1 { font-size: 1.7rem; color: var(--primary-color); font-weight: 700; letter-spacing: 0.5px; }
+    .header-title p { font-size: 0.85rem; color: var(--sub-text); margin-top: 2px; }
 
-    .header-btns { display: flex; gap: 8px; }
-    .theme-toggle-btn, .admin-entry-btn {
+    .header-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    .icon-btn {
       background: var(--card-bg); color: var(--text-color);
-      border: 1px solid var(--border-color); padding: 8px 14px;
-      border-radius: 20px; cursor: pointer; font-size: 0.82rem; transition: all 0.25s;
-      box-shadow: 0 2px 8px var(--card-shadow);
+      border: 1px solid var(--border-color); padding: 7px 12px;
+      border-radius: 20px; cursor: pointer; font-size: 0.8rem; transition: all 0.25s;
+      box-shadow: 0 2px 6px var(--card-shadow);
     }
-    .theme-toggle-btn:hover, .admin-entry-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
+    .icon-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
 
     main { width: 100%; max-width: 680px; }
+
+    /* --- 夜間關懷橫幅 --- */
+    .night-banner {
+      display: none; background: #3a423e; color: #f0ece6;
+      padding: 10px 16px; border-radius: 12px; margin-bottom: 16px;
+      font-size: 0.82rem; text-align: center; border: 1px solid #4a544f;
+    }
 
     /* --- 首頁儀表板 --- */
     .hero-banner {
       background: linear-gradient(135deg, var(--card-bg) 0%, var(--inner-bg) 100%);
       border: 1px solid var(--border-color);
       border-radius: 20px;
-      padding: 24px;
+      padding: 20px;
       margin-bottom: 20px;
       text-align: center;
       box-shadow: 0 6px 20px var(--card-shadow);
     }
-    .hero-banner h2 { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 6px; }
+    .hero-banner h2 { font-size: 1.15rem; color: var(--primary-color); margin-bottom: 6px; }
     .hero-banner p { font-size: 0.85rem; color: var(--sub-text); line-height: 1.5; }
 
     .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
     }
 
     .feature-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 18px;
-      padding: 22px 18px;
+      border-radius: 16px;
+      padding: 18px 14px;
       text-align: center;
       cursor: pointer;
-      box-shadow: 0 4px 16px var(--card-shadow);
+      box-shadow: 0 4px 14px var(--card-shadow);
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     .feature-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
       border-color: var(--primary-color);
-      box-shadow: 0 10px 24px var(--card-hover-shadow);
+      box-shadow: 0 8px 20px var(--card-hover-shadow);
     }
-    .feature-card .icon { font-size: 2.2rem; margin-bottom: 10px; display: block; }
-    .feature-card h3 { font-size: 1.05rem; margin-bottom: 6px; font-weight: 600; }
-    .feature-card p { font-size: 0.82rem; color: var(--sub-text); line-height: 1.4; }
+    .feature-card .icon { font-size: 2rem; margin-bottom: 8px; display: block; }
+    .feature-card h3 { font-size: 1rem; margin-bottom: 4px; font-weight: 600; }
+    .feature-card p { font-size: 0.8rem; color: var(--sub-text); line-height: 1.35; }
 
-    /* --- 獨立視窗面板 --- */
+    /* --- 面板通用樣式 --- */
     .view-panel {
       display: none;
       background: var(--card-bg);
       border-radius: 20px;
-      padding: 28px;
+      padding: 24px;
       border: 1px solid var(--border-color);
-      box-shadow: 0 12px 30px var(--card-shadow);
+      box-shadow: 0 10px 28px var(--card-shadow);
       animation: fadeInSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .view-panel.active { display: block; }
-    @keyframes fadeInSlide { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInSlide { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
     .back-btn {
       background: transparent; border: none; color: var(--primary-color);
-      font-size: 0.92rem; font-weight: 600; cursor: pointer; margin-bottom: 18px;
-      display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer; margin-bottom: 16px;
+      display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s;
     }
     .back-btn:hover { color: var(--primary-hover); }
 
-    /* --- 壓力診斷 6 大領域選擇卡片 --- */
-    .category-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 15px;
-    }
+    /* --- 6 大領域選擇卡片 --- */
+    .category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
     .category-btn {
-      background: var(--inner-bg);
-      border: 1.5px solid var(--border-color);
-      border-radius: 14px;
-      padding: 16px 12px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.25s;
+      background: var(--inner-bg); border: 1.5px solid var(--border-color);
+      border-radius: 12px; padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.25s;
     }
-    .category-btn:hover {
-      border-color: var(--primary-color);
-      background: var(--card-bg);
-      transform: scale(1.02);
-    }
-    .category-btn .cat-icon { font-size: 1.8rem; display: block; margin-bottom: 6px; }
-    .category-btn .cat-title { font-size: 0.95rem; font-weight: bold; color: var(--text-color); }
-    .category-btn .cat-desc { font-size: 0.75rem; color: var(--sub-text); margin-top: 4px; }
+    .category-btn:hover { border-color: var(--primary-color); background: var(--card-bg); transform: scale(1.01); }
+    .category-btn .cat-icon { font-size: 1.6rem; display: block; margin-bottom: 4px; }
+    .category-btn .cat-title { font-size: 0.9rem; font-weight: bold; color: var(--text-color); }
+    .category-btn .cat-desc { font-size: 0.72rem; color: var(--sub-text); margin-top: 2px; }
 
-    /* --- 呼吸調節與切換 --- */
-    .mode-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    /* --- 呼吸調節 --- */
+    .mode-selector { display: flex; justify-content: center; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
     .mode-btn {
       background: var(--inner-bg); border: 1px solid var(--border-color);
-      color: var(--text-color); padding: 6px 14px; border-radius: 20px;
-      cursor: pointer; font-size: 0.82rem; transition: all 0.2s;
+      color: var(--text-color); padding: 5px 12px; border-radius: 18px;
+      cursor: pointer; font-size: 0.8rem; transition: all 0.2s;
     }
     .mode-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
 
-    .breathe-box { display: flex; flex-direction: column; align-items: center; padding: 20px 0; }
-    .breathe-circle-wrap {
-      position: relative; width: 190px; height: 190px;
-      display: flex; align-items: center; justify-content: center;
-    }
+    .breathe-box { display: flex; flex-direction: column; align-items: center; padding: 15px 0; }
+    .breathe-circle-wrap { position: relative; width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; }
     .breathe-circle {
-      width: 90px; height: 90px;
-      background: radial-gradient(circle, var(--accent-color) 0%, var(--primary-color) 100%);
-      border-radius: 50%; box-shadow: 0 0 30px rgba(115, 138, 129, 0.35);
-      transform: scale(1);
+      width: 85px; height: 85px; background: radial-gradient(circle, var(--accent-color) 0%, var(--primary-color) 100%);
+      border-radius: 50%; box-shadow: 0 0 25px rgba(115, 138, 129, 0.35); transform: scale(1);
     }
-    .breathe-text {
-      position: absolute; font-size: 1.1rem; font-weight: bold; color: #ffffff;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3); pointer-events: none; text-align: center;
-    }
+    .breathe-text { position: absolute; font-size: 1.05rem; font-weight: bold; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.3); pointer-events: none; }
 
-    /* --- 3D 卡片翻轉 (心靈小卡) --- */
-    .card-container {
-      perspective: 1000px;
-      width: 100%; max-width: 320px; height: 200px;
-      margin: 20px auto; cursor: pointer;
-    }
-    .card-inner {
-      position: relative; width: 100%; height: 100%;
-      text-align: center; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform-style: preserve-3d;
-    }
+    /* --- 3D 卡片翻轉 (換上 🌟 溫柔星光) --- */
+    .card-container { perspective: 1000px; width: 100%; max-width: 300px; height: 190px; margin: 16px auto; cursor: pointer; }
+    .card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
     .card-inner.flipped { transform: rotateY(180deg); }
     .card-front, .card-back {
-      position: absolute; width: 100%; height: 100%;
-      backface-visibility: hidden; border-radius: 16px;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      padding: 20px; box-shadow: 0 6px 20px var(--card-shadow); border: 1px solid var(--border-color);
+      position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 16px;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 18px;
+      box-shadow: 0 6px 18px var(--card-shadow); border: 1px solid var(--border-color);
     }
     .card-front { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; }
-    .card-back {
-      background: var(--inner-bg); color: var(--text-color);
-      transform: rotateY(180deg); border: 2px solid var(--primary-color);
-    }
+    .card-back { background: var(--inner-bg); color: var(--text-color); transform: rotateY(180deg); border: 2px solid var(--primary-color); }
 
     /* --- 輸入框與通用按鈕 --- */
-    textarea {
-      width: 100%; height: 95px; background: var(--inner-bg); border: 1px solid var(--border-color);
-      color: var(--text-color); padding: 12px; border-radius: 12px; resize: none; font-size: 0.92rem;
-      transition: all 0.3s; margin-top: 10px;
+    textarea, input[type="text"] {
+      width: 100%; background: var(--inner-bg); border: 1px solid var(--border-color);
+      color: var(--text-color); padding: 10px 12px; border-radius: 10px; font-size: 0.88rem; transition: all 0.3s;
     }
-    textarea:focus { outline: none; border-color: var(--primary-color); }
+    textarea { height: 90px; resize: none; margin-top: 8px; }
+    textarea:focus, input:focus { outline: none; border-color: var(--primary-color); }
     textarea.shredding { opacity: 0; transform: scale(0.8); filter: blur(10px); transition: all 0.8s ease; }
 
-    .btn-group { display: flex; gap: 10px; margin-top: 12px; }
+    .btn-group { display: flex; gap: 8px; margin-top: 10px; }
     .action-btn {
-      flex: 1; padding: 11px; border: none; border-radius: 10px;
-      cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: background 0.2s;
+      flex: 1; padding: 10px; border: none; border-radius: 10px;
+      cursor: pointer; font-size: 0.88rem; font-weight: 600; transition: background 0.2s;
     }
     .btn-primary { background: var(--primary-color); color: white; }
     .btn-primary:hover { background: var(--primary-hover); }
     .btn-danger { background: #d96b6b; color: white; }
     .btn-danger:hover { background: #c25555; }
 
-    .treehole-list { margin-top: 20px; max-height: 220px; overflow-y: auto; }
+    /* --- 樹洞與互動 --- */
+    .treehole-list { margin-top: 16px; max-height: 260px; overflow-y: auto; }
     .treehole-item {
-      background: var(--inner-bg); padding: 12px 14px; border-radius: 10px; margin-bottom: 10px;
-      border-left: 4px solid var(--primary-color); display: flex; justify-content: space-between; align-items: center;
+      background: var(--inner-bg); padding: 12px 14px; border-radius: 12px; margin-bottom: 12px;
+      border-left: 4px solid var(--primary-color);
     }
-    .treehole-time { font-size: 0.75rem; color: var(--sub-text); margin-top: 4px; }
+    .treehole-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 0.75rem; color: var(--sub-text); }
+    .treehole-actions { display: flex; gap: 8px; margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--border-color); }
+    .react-btn { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 3px 8px; font-size: 0.75rem; cursor: pointer; color: var(--text-color); }
+    .react-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
 
-    /* --- 壓力診斷問答 --- */
-    .quiz-q { margin-bottom: 16px; background: var(--inner-bg); padding: 14px; border-radius: 10px; }
-    .quiz-q p { font-size: 0.9rem; margin-bottom: 10px; font-weight: 500; }
-    .quiz-opts { display: flex; gap: 12px; }
-    .quiz-opts label { font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+    .guardian-reply {
+      background: var(--card-bg); border-radius: 8px; padding: 10px; margin-top: 8px;
+      font-size: 0.82rem; border: 1px solid var(--primary-color); line-height: 1.4; color: var(--text-color);
+    }
 
-    /* --- CBT 壓力拆解 --- */
-    .cbt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-    .cbt-col { background: var(--inner-bg); padding: 12px; border-radius: 10px; min-height: 120px; }
-    .cbt-col h4 { font-size: 0.85rem; margin-bottom: 8px; text-align: center; }
-    .cbt-item { background: var(--card-bg); padding: 8px; border-radius: 6px; margin-bottom: 6px; font-size: 0.85rem; }
+    /* --- CBT 與延後箱 --- */
+    .cbt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .cbt-col { background: var(--inner-bg); padding: 10px; border-radius: 10px; min-height: 100px; }
+    .cbt-col h4 { font-size: 0.82rem; margin-bottom: 6px; text-align: center; }
+    .cbt-item { background: var(--card-bg); padding: 6px 8px; border-radius: 6px; margin-bottom: 5px; font-size: 0.82rem; }
 
-    .admin-item-del-btn { background: #d96b6b; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+    /* --- 換位思考抽屜 Modal --- */
+    .modal-overlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 100;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-content { background: var(--card-bg); padding: 22px; border-radius: 16px; width: 90%; max-width: 440px; border: 1px solid var(--border-color); }
 
-    footer { margin-top: auto; padding-top: 30px; font-size: 0.8rem; color: var(--sub-text); text-align: center; line-height: 1.6; }
+    footer { margin-top: auto; padding-top: 24px; font-size: 0.78rem; color: var(--sub-text); text-align: center; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -250,103 +232,121 @@
   <header>
     <div class="header-title">
       <h1>心靈綠洲</h1>
-      <p>莫蘭迪沉浸式紓壓空間</p>
+      <p>靜謐沉浸式紓壓空間</p>
     </div>
     <div class="header-btns">
-      <button id="themeToggle" class="theme-toggle-btn" onclick="toggleTheme()">☀️ 莫蘭迪米</button>
-      <button class="admin-entry-btn" onclick="adminLogin()">⚙️ 後台</button>
+      <button class="icon-btn" onclick="toggleAudio()" id="audioBtn">🎧 自然靜音</button>
+      <button id="themeToggle" class="icon-btn" onclick="toggleTheme()">☀️ 柔米風</button>
+      <button class="icon-btn" onclick="adminLogin()">⚙️ 後台</button>
     </div>
   </header>
 
   <main>
-    <!-- 1. 主頁面 (Dashboard) -->
+    <!-- 深夜關懷語句 -->
+    <div id="nightBanner" class="night-banner">
+      🌙 深夜了，辛苦了一整天，讓大腦放鬆下來，準備好好休息吧。
+    </div>
+
+    <!-- 1. 主頁儀表板 -->
     <div id="homeDashboard">
       <div class="hero-banner">
         <h2>🌿 歡迎來到你的心靈小憩所</h2>
-        <p>在這裡放慢腳步，給情緒一個溫柔棲息的地方。選擇一項練習，開始你的放鬆之旅。</p>
+        <p>在這裡放慢腳步，給情緒一個溫柔棲息的地方。選擇一項練習，開始你的平靜之旅。</p>
       </div>
 
       <div class="dashboard-grid">
         <div class="feature-card" onclick="openView('stressQuizView')">
           <span class="icon">📊</span>
           <h3>壓力診斷</h3>
-          <p>選擇問題領域，進行自我梳理並獲得專屬靈感卡</p>
+          <p>6 大領域自我梳理，獲得專屬靈感指引卡</p>
         </div>
 
         <div class="feature-card" onclick="openView('breatheView')">
           <span class="icon">🫁</span>
           <h3>呼吸調節</h3>
-          <p>跟隨溫柔的律動，進行 4-7-8 或箱型深呼吸</p>
+          <p>跟隨溫柔律動深呼吸，感受多人沉浸式陪伴</p>
         </div>
 
         <div class="feature-card" onclick="openView('cardView')">
-          <span class="icon">🃏</span>
-          <h3>心靈靈感卡</h3>
+          <span class="icon">🌟</span>
+          <h3>靈感轉念卡</h3>
           <p>輕點 3D 翻牌，收下今日份的正向轉念指引</p>
         </div>
 
         <div class="feature-card" onclick="openView('treeholeView')">
           <span class="icon">🪵</span>
           <h3>心靈樹洞</h3>
-          <p>無壓傾訴與留存，或是將煩惱徹底煙消雲散</p>
+          <p>無壓傾訴與陪伴，獲得樹洞守護者的溫暖回覆</p>
         </div>
 
         <div class="feature-card" onclick="openView('cbtView')">
           <span class="icon">⚖️</span>
           <h3>壓力拆解</h3>
-          <p>劃分「可控」與「不可控」，找回心理主導權</p>
+          <p>劃分可控與不可控，搭配「換位思考抽屜」</p>
+        </div>
+
+        <div class="feature-card" onclick="openView('worryDelayView')">
+          <span class="icon">⏳</span>
+          <h3>煩惱延後箱</h3>
+          <p>將當前無法處理的焦慮封存，約定時間再面對</p>
+        </div>
+
+        <div class="feature-card" onclick="openView('driftBottleView')">
+          <span class="icon">💌</span>
+          <h3>微光漂流瓶</h3>
+          <p>抽一張來自陌生人的溫暖祝福，或寄出你的善意</p>
+        </div>
+
+        <div class="feature-card" onclick="openView('moodView')">
+          <span class="icon">☀️</span>
+          <h3>情緒打卡與微成就</h3>
+          <p>記錄今日氣象，並寫下 1 件完成的微小好事</p>
         </div>
 
         <div class="feature-card" onclick="openView('groundingView')">
           <span class="icon">🌿</span>
           <h3>感官著陸</h3>
-          <p>5-4-3-2-1 著陸法，快速擺脫急躁與焦慮</p>
+          <p>5-4-3-2-1 著陸練習，迅速平復急躁與焦慮</p>
         </div>
       </div>
     </div>
 
-    <!-- 2. 功能專注視窗 (Views) -->
+    <!-- 2. 各功能專注面板 (Views) -->
 
-    <!-- [View 1: 兩階段壓力診斷] -->
+    <!-- [View 1: 壓力診斷] -->
     <div id="stressQuizView" class="view-panel">
       <button class="back-btn" onclick="goHome()">← 返回主頁</button>
       
-      <!-- 階段 A: 選擇 6 大領域 -->
       <div id="quizStepCategory">
-        <h3>📊 壓力診斷 - 第一步：領域選擇</h3>
-        <p style="font-size: 0.85rem; color: var(--sub-text); margin-top: 4px;">請選擇當前最讓你感受壓迫或困擾的方面：</p>
+        <h3>📊 壓力診斷 - 第一步：選擇困擾領域</h3>
+        <p style="font-size: 0.82rem; color: var(--sub-text); margin-top: 4px;">請選擇當前最讓你感到壓迫或牽掛的方面：</p>
         
         <div class="category-grid">
           <div class="category-btn" onclick="selectQuizCategory('study')">
             <span class="cat-icon">🎓</span>
             <div class="cat-title">課業與考試</div>
-            <div class="cat-desc">進度、成績、升學或讀書焦慮</div>
+            <div class="cat-desc">進度、成績或升學讀書壓力</div>
           </div>
-
           <div class="category-btn" onclick="selectQuizCategory('work')">
             <span class="cat-icon">💼</span>
             <div class="cat-title">職場與工作</div>
-            <div class="cat-desc">專案、工作量、職場溝通或瓶頸</div>
+            <div class="cat-desc">專案、工作量或職場溝通瓶頸</div>
           </div>
-
           <div class="category-btn" onclick="selectQuizCategory('family')">
             <span class="cat-icon">🏡</span>
             <div class="cat-title">家庭與親情</div>
-            <div class="cat-desc">代溝、家庭期待、溝通或邊界感</div>
+            <div class="cat-desc">代溝、家庭期待或溝通邊界感</div>
           </div>
-
           <div class="category-btn" onclick="selectQuizCategory('relationship')">
             <span class="cat-icon">👥</span>
             <div class="cat-title">人際與感情</div>
-            <div class="cat-desc">相處、社交壓力、感情或孤獨感</div>
+            <div class="cat-desc">相處摩擦、社交焦慮或孤獨感</div>
           </div>
-
           <div class="category-btn" onclick="selectQuizCategory('future')">
             <span class="cat-icon">🧭</span>
             <div class="cat-title">未來與生涯</div>
             <div class="cat-desc">方向迷惘、選擇困難或不確定感</div>
           </div>
-
           <div class="category-btn" onclick="selectQuizCategory('daily')">
             <span class="cat-icon">🍃</span>
             <div class="cat-title">日常與情緒</div>
@@ -355,72 +355,70 @@
         </div>
       </div>
 
-      <!-- 階段 B: 答題與評估 -->
       <div id="quizStepQuestions" style="display: none;">
         <h3>📊 壓力診斷 - 第二步：狀態評估</h3>
-        <p style="font-size: 0.85rem; color: var(--sub-text); margin-top: 4px; margin-bottom: 15px;">
+        <p style="font-size: 0.82rem; color: var(--sub-text); margin-top: 2px; margin-bottom: 12px;">
           當前領域：<strong id="selectedCatTitle" style="color: var(--primary-color);"></strong>
         </p>
 
         <form id="quizForm">
-          <div class="quiz-q">
-            <p>1. 想到這個方面的問題時，頻率與程度如何？</p>
-            <div class="quiz-opts">
+          <div style="background: var(--inner-bg); padding: 12px; border-radius: 10px; margin-bottom: 10px;">
+            <p style="font-size: 0.85rem; font-weight: 500;">1. 想到這個方面的問題時，頻率與程度如何？</p>
+            <div style="display: flex; gap: 10px; margin-top: 6px; font-size: 0.82rem;">
               <label><input type="radio" name="q1" value="1" checked> 偶爾想起</label>
               <label><input type="radio" name="q1" value="2"> 經常纏繞</label>
               <label><input type="radio" name="q1" value="3"> 幾乎難以思考別的事</label>
             </div>
           </div>
 
-          <div class="quiz-q">
-            <p>2. 這項壓力是否影響了你的睡眠、專注力或身體狀態？</p>
-            <div class="quiz-opts">
+          <div style="background: var(--inner-bg); padding: 12px; border-radius: 10px; margin-bottom: 10px;">
+            <p style="font-size: 0.85rem; font-weight: 500;">2. 這項壓力是否影響了睡眠、專注力或身體狀態？</p>
+            <div style="display: flex; gap: 10px; margin-top: 6px; font-size: 0.82rem;">
               <label><input type="radio" name="q2" value="1" checked> 影響輕微</label>
               <label><input type="radio" name="q2" value="2"> 中度影響</label>
               <label><input type="radio" name="q2" value="3"> 相當嚴重</label>
             </div>
           </div>
 
-          <div class="quiz-q">
-            <p>3. 對於解決或改善現狀，你目前的心理感受是？</p>
-            <div class="quiz-opts">
+          <div style="background: var(--inner-bg); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+            <p style="font-size: 0.85rem; font-weight: 500;">3. 對於解決或改善現狀，你目前的心理感受是？</p>
+            <div style="display: flex; gap: 10px; margin-top: 6px; font-size: 0.82rem;">
               <label><input type="radio" name="q3" value="1" checked> 還有方向</label>
               <label><input type="radio" name="q3" value="2"> 有點迷惘</label>
               <label><input type="radio" name="q3" value="3"> 感到無力</label>
             </div>
           </div>
 
-          <button type="button" class="action-btn btn-primary" onclick="calculateQuizResult()" style="width: 100%;">產生診斷與專屬心靈小卡</button>
+          <button type="button" class="action-btn btn-primary" onclick="calculateQuizResult()" style="width: 100%;">產生診斷與專屬靈感卡</button>
         </form>
       </div>
 
-      <!-- 階段 C: 診斷結果與領域專屬小卡 -->
       <div id="quizResultArea" style="display: none; margin-top: 15px;">
-        <hr style="border-color: var(--border-color); margin-bottom: 15px;">
+        <hr style="border-color: var(--border-color); margin-bottom: 12px;">
         <h4 style="color: var(--primary-color);">診斷評估：<span id="quizScoreText"></span></h4>
-        <p id="quizAdviceText" style="font-size: 0.88rem; margin-top: 8px; line-height: 1.5;"></p>
+        <p id="quizAdviceText" style="font-size: 0.85rem; margin-top: 6px; line-height: 1.4;"></p>
         
-        <h5 style="margin-top: 18px; margin-bottom: 8px;">✨ 為你抽出的「<span id="cardCatName"></span>」專屬心靈小卡：</h5>
+        <h5 style="margin-top: 16px; margin-bottom: 6px;">✨ 為你抽出的「<span id="cardCatName"></span>」專屬靈感卡：</h5>
         <div class="card-container" onclick="flipCard('quizCardInner')">
           <div class="card-inner" id="quizCardInner">
             <div class="card-front">
-              <span style="font-size: 2.2rem;">🃏</span>
-              <p style="margin-top: 8px; font-weight: 500;">點擊翻開專屬小卡</p>
+              <span style="font-size: 2.2rem;">🌟</span>
+              <p style="margin-top: 8px; font-weight: 500; font-size: 0.88rem;">點擊翻開專屬卡片</p>
             </div>
             <div class="card-back">
-              <p id="quizCardQuote" style="font-weight: bold; font-size: 0.9rem; margin-bottom: 8px;"></p>
-              <p id="quizCardTip" style="font-size: 0.78rem; color: var(--sub-text); line-height: 1.4;"></p>
+              <p id="quizCardQuote" style="font-weight: bold; font-size: 0.88rem; margin-bottom: 6px;"></p>
+              <p id="quizCardTip" style="font-size: 0.76rem; color: var(--sub-text); line-height: 1.35;"></p>
             </div>
           </div>
         </div>
-        <button class="action-btn btn-primary" onclick="resetQuizFlow()" style="width: 100%; margin-top: 10px;">重新進行診斷</button>
+        <button class="action-btn btn-primary" onclick="resetQuizFlow()" style="width: 100%; margin-top: 8px;">重新進行診斷</button>
       </div>
     </div>
 
-    <!-- [View 2: 呼吸調節] -->
+    <!-- [View 2: 呼吸調節 (含集體陪伴 count)] -->
     <div id="breatheView" class="view-panel">
       <button class="back-btn" onclick="goHome()">← 返回主頁</button>
-      <h3 style="text-align: center; margin-bottom: 12px;">🫁 呼吸調節練習</h3>
+      <h3 style="text-align: center; margin-bottom: 10px;">🫁 呼吸調節練習</h3>
       
       <div class="mode-selector">
         <button class="mode-btn active" onclick="switchBreatheMode('478', this)">4-7-8 放鬆</button>
@@ -433,56 +431,60 @@
           <div class="breathe-circle" id="breatheCircle"></div>
           <div class="breathe-text" id="breatheText">準備...</div>
         </div>
-        <p id="breatheDesc" style="margin-top: 25px; color: var(--sub-text); font-size: 0.85rem; text-align: center; line-height: 1.5;">
-          4-7-8 呼吸法：吸氣 4 秒 ➔ 憋氣 7 秒 ➔ 吐氣 8 秒，能迅速活化副交感神經。
+        <p id="breatheDesc" style="margin-top: 20px; color: var(--sub-text); font-size: 0.82rem; text-align: center; line-height: 1.4;">
+          4-7-8 呼吸法：吸氣 4 秒 ➔ 憋氣 7 秒 ➔ 吐氣 8 秒，活化副交感神經。
         </p>
+        <div style="margin-top: 15px; background: var(--inner-bg); padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; color: var(--primary-color);">
+          👥 此刻有 <span id="coBreatheCount">14</span> 位朋友正和你一起在這裡深呼吸...
+        </div>
       </div>
     </div>
 
-    <!-- [View 3: 獨立心靈靈感卡] -->
+    <!-- [View 3: 靈感轉念卡 (換成 🌟 圖案)] -->
     <div id="cardView" class="view-panel">
       <button class="back-btn" onclick="goHome()">← 返回主頁</button>
-      <h3 style="text-align: center;">🃏 心靈靈感卡</h3>
-      <p style="text-align: center; font-size: 0.85rem; color: var(--sub-text); margin-top: 4px;">輕點卡片翻轉，收下這份溫柔的轉念指引</p>
+      <h3 style="text-align: center;">🌟 靈感轉念卡</h3>
+      <p style="text-align: center; font-size: 0.82rem; color: var(--sub-text); margin-top: 2px;">輕點卡片翻轉，收下這份溫柔的轉念指引</p>
 
       <div class="card-container" onclick="drawStandaloneCard()">
         <div class="card-inner" id="standaloneCardInner">
           <div class="card-front">
             <span style="font-size: 2.5rem;">🌟</span>
-            <p style="margin-top: 10px; font-weight: bold;">點擊抽一張靈感小卡</p>
+            <p style="margin-top: 8px; font-weight: bold; font-size: 0.9rem;">點擊抽一張靈感卡</p>
           </div>
           <div class="card-back">
-            <p id="standaloneQuote" style="font-weight: bold; font-size: 0.92rem; margin-bottom: 8px;"></p>
-            <p id="standaloneTip" style="font-size: 0.8rem; color: var(--sub-text); line-height: 1.4;"></p>
+            <p id="standaloneQuote" style="font-weight: bold; font-size: 0.88rem; margin-bottom: 6px;"></p>
+            <p id="standaloneTip" style="font-size: 0.78rem; color: var(--sub-text); line-height: 1.35;"></p>
           </div>
         </div>
       </div>
-      <button class="action-btn btn-primary" onclick="resetAndDrawCard()" style="width: 100%; margin-top: 10px;">再抽一張</button>
+      <button class="action-btn btn-primary" onclick="resetAndDrawCard()" style="width: 100%; margin-top: 8px;">再抽一張</button>
     </div>
 
-    <!-- [View 4: 心靈樹洞] -->
+    <!-- [View 4: 心靈樹洞與樹洞守護者] -->
     <div id="treeholeView" class="view-panel">
       <button class="back-btn" onclick="goHome()">← 返回主頁</button>
-      <h3>🪵 心靈樹洞與粉碎機</h3>
+      <h3>🪵 心靈樹洞與陪伴</h3>
       <textarea id="treeholeInput" placeholder="在這裡寫下任何讓你感到壓迫、煩躁或難過的事..."></textarea>
       <div class="btn-group">
         <button class="action-btn btn-primary" onclick="addTreeholeMessage()">傾訴並留存</button>
         <button class="action-btn btn-danger" onclick="shredWorry()">🔥 煙消雲散（銷毀）</button>
       </div>
+
       <div class="treehole-list" id="treeholeList"></div>
     </div>
 
-    <!-- [View 5: 壓力拆解 (CBT)] -->
+    <!-- [View 5: 壓力拆解 & 換位思考抽屜] -->
     <div id="cbtView" class="view-panel">
       <button class="back-btn" onclick="goHome()">← 返回主頁</button>
       <h3>⚖️ 劃分可控與不可控</h3>
-      <div style="display: flex; gap: 8px; margin-top: 10px;">
-        <input type="text" id="cbtInput" placeholder="輸入具體煩惱..." style="flex:1; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--inner-bg); color: var(--text-color);">
-        <select id="cbtType" style="padding: 10px; border-radius: 8px; background: var(--inner-bg); color: var(--text-color); border: 1px solid var(--border-color);">
+      <div style="display: flex; gap: 6px; margin-top: 10px;">
+        <input type="text" id="cbtInput" placeholder="輸入具體煩惱..." style="flex:1;">
+        <select id="cbtType" style="padding: 8px; border-radius: 8px; background: var(--inner-bg); color: var(--text-color); border: 1px solid var(--border-color);">
           <option value="controllable">可控</option>
           <option value="uncontrollable">不可控</option>
         </select>
-        <button class="action-btn btn-primary" onclick="addCbtItem()" style="flex:0 0 65px;">加入</button>
+        <button class="action-btn btn-primary" onclick="addCbtItem()" style="flex:0 0 60px;">加入</button>
       </div>
 
       <div class="cbt-grid">
@@ -495,45 +497,133 @@
           <div id="uncontrollableList"></div>
         </div>
       </div>
+
+      <button class="action-btn btn-primary" onclick="openModal('reframingModal')" style="width: 100%; margin-top: 15px; background: var(--accent-color);">
+        🔄 打開「換位思考抽屜」：如果是好友遇到這件事？
+      </button>
     </div>
 
-    <!-- [View 6: 感官著陸] -->
+    <!-- [View 6: 煩惱延後箱] -->
+    <div id="worryDelayView" class="view-panel">
+      <button class="back-btn" onclick="goHome()">← 返回主頁</button>
+      <h3>⏳ 煩惱延後箱</h3>
+      <p style="font-size: 0.82rem; color: var(--sub-text); margin-top: 2px;">當前無法解決的大腦反芻，先封存起來，約定時間再面對。</p>
+
+      <textarea id="worryDelayInput" placeholder="寫下此刻懸在心頭、但現在無法立刻解決的煩惱..." style="margin-top: 10px;"></textarea>
+      <div style="display: flex; gap: 8px; margin-top: 8px; align-items: center;">
+        <span style="font-size: 0.82rem; color: var(--sub-text);">約定面對時間：</span>
+        <select id="delayTimeSelect" style="padding: 6px; border-radius: 8px; background: var(--inner-bg); color: var(--text-color); border: 1px solid var(--border-color); flex: 1;">
+          <option value="今晚睡前 21:00">今晚睡前 (21:00)</option>
+          <option value="明天下午 17:00">明天下午 (17:00)</option>
+          <option value="這個週末">這個週末</option>
+        </select>
+      </div>
+      <button class="action-btn btn-primary" onclick="sealWorry()" style="width: 100%; margin-top: 10px;">🔒 封存煩惱並放心離去</button>
+
+      <div id="sealedList" style="margin-top: 16px;"></div>
+    </div>
+
+    <!-- [View 7: 微光漂流瓶] -->
+    <div id="driftBottleView" class="view-panel">
+      <button class="back-btn" onclick="goHome()">← 返回主頁</button>
+      <h3>💌 微光漂流瓶</h3>
+      <p style="font-size: 0.82rem; color: var(--sub-text); margin-top: 2px;">抽取來自陌生人的溫暖祝福，或寄出一瓶善意。</p>
+
+      <div style="display: flex; gap: 10px; margin-top: 14px;">
+        <button class="action-btn btn-primary" onclick="drawBottle()">🎣 撈取一個漂流瓶</button>
+        <button class="action-btn btn-primary" onclick="toggleBottleSendForm()" style="background: var(--accent-color);">✍️ 扔出善意漂流瓶</button>
+      </div>
+
+      <div id="bottleDisplay" style="display: none; background: var(--inner-bg); padding: 14px; border-radius: 12px; margin-top: 14px; border: 1px solid var(--primary-color);">
+        <p style="font-size: 0.82rem; color: var(--primary-color); font-weight: bold; margin-bottom: 4px;">🌊 你撈到了一個漂流瓶：</p>
+        <p id="bottleContentText" style="font-size: 0.88rem; line-height: 1.4;"></p>
+      </div>
+
+      <div id="bottleSendArea" style="display: none; margin-top: 14px;">
+        <textarea id="bottleInput" placeholder="寫下一句溫柔的話，送給此刻可能也在低潮的陌生人..."></textarea>
+        <button class="action-btn btn-primary" onclick="sendBottle()" style="width: 100%; margin-top: 8px;">丟入海中傳播溫暖</button>
+      </div>
+    </div>
+
+    <!-- [View 8: 情緒打卡與微成就] -->
+    <div id="moodView" class="view-panel">
+      <button class="back-btn" onclick="goHome()">← 返回主頁</button>
+      <h3>☀️ 今日情緒打卡與微成就</h3>
+      
+      <p style="font-size: 0.82rem; color: var(--sub-text); margin-top: 4px;">1. 選擇今天的心情氣象：</p>
+      <div style="display: flex; justify-content: space-between; margin-top: 8px; background: var(--inner-bg); padding: 10px; border-radius: 12px;">
+        <button class="react-btn" onclick="setMood('☀️ 晴朗')">☀️ 晴朗</button>
+        <button class="react-btn" onclick="setMood('☁️ 多雲')">☁️ 多雲</button>
+        <button class="react-btn" onclick="setMood('🌧️ 微微下雨')">🌧️ 下雨</button>
+        <button class="react-btn" onclick="setMood('⛈️ 雷雨')">⛈️ 雷雨</button>
+        <button class="react-btn" onclick="setMood('🌫️ 起霧迷惘')">🌫️ 起霧</button>
+      </div>
+
+      <p style="font-size: 0.82rem; color: var(--sub-text); margin-top: 14px;">2. 記錄今天完成的 1 件「微小成就」：</p>
+      <input type="text" id="microAchieveInput" placeholder="例如：今天有好好喝足水 / 準時吃了午飯 / 踏出門散步5分鐘">
+      <button class="action-btn btn-primary" onclick="saveMicroAchievement()" style="width: 100%; margin-top: 8px;">打卡並存入時光盒</button>
+
+      <div id="achieveList" style="margin-top: 16px; max-height: 150px; overflow-y: auto;"></div>
+    </div>
+
+    <!-- [View 9: 感官著陸] -->
     <div id="groundingView" class="view-panel">
       <button class="back-btn" onclick="goHome()">← 返回主頁</button>
-      <div style="text-align: center; padding: 15px 0;">
-        <div id="groundingNum" style="font-size: 2.8rem; font-weight: bold; color: var(--primary-color);">5</div>
-        <h3 id="groundingTitle" style="margin: 10px 0;">看 (See)</h3>
-        <p id="groundingDesc" style="color: var(--sub-text); margin-bottom: 25px; line-height: 1.5;">環顧四周，找出 5 個藍色的物品，或是你以前沒注意到的細節。</p>
+      <div style="text-align: center; padding: 10px 0;">
+        <div id="groundingNum" style="font-size: 2.5rem; font-weight: bold; color: var(--primary-color);">5</div>
+        <h3 id="groundingTitle" style="margin: 8px 0;">看 (See)</h3>
+        <p id="groundingDesc" style="color: var(--sub-text); margin-bottom: 20px; line-height: 1.4; font-size: 0.85rem;">環顧四周，找出 5 個藍色或木質物品，或是未曾注意到的細節。</p>
         <button class="action-btn btn-primary" onclick="nextGroundingStep()">完成，下一步</button>
       </div>
     </div>
 
-    <!-- [View 7: 後台管理員視窗] -->
+    <!-- [View 10: 後台管理] -->
     <div id="adminView" class="view-panel">
       <button class="back-btn" onclick="goHome()">← 退出後台</button>
       <h3>⚙️ 管理員控制台</h3>
-      <p style="font-size: 0.85rem; color: var(--sub-text); margin-top: 4px; margin-bottom: 15px;">您已成功驗證密碼，可在這裡管理樹洞留言與系統數據。</p>
+      <p style="font-size: 0.82rem; color: var(--sub-text); margin-top: 4px; margin-bottom: 12px;">已成功驗證密碼，可在這裡管理樹洞內容。</p>
       
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-        <h4>🪵 樹洞所有留言 (共 <span id="adminMsgCount">0</span> 筆)</h4>
-        <button class="action-btn btn-danger" onclick="clearAllTreehole()" style="flex: 0 0 auto; padding: 6px 12px; font-size: 0.8rem;">🧹 清空所有留言</button>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <h4>🪵 樹洞留言 (共 <span id="adminMsgCount">0</span> 筆)</h4>
+        <button class="action-btn btn-danger" onclick="clearAllTreehole()" style="flex: 0 0 auto; padding: 5px 10px; font-size: 0.78rem;">🧹 清空所有留言</button>
       </div>
 
       <div class="treehole-list" id="adminTreeholeList"></div>
     </div>
   </main>
 
+  <!-- 換位思考 Modal -->
+  <div class="modal-overlay" id="reframingModal">
+    <div class="modal-content">
+      <h3 style="color: var(--primary-color); margin-bottom: 6px;">🔄 換位思考抽屜</h3>
+      <p style="font-size: 0.82rem; color: var(--sub-text); line-height: 1.4;">
+        想像你最好的朋友現在遇到了與你一模一樣的困難與壓力，你會有什麼態度？會對他說些什麼溫柔鼓勵的話？
+      </p>
+      <textarea id="reframingInput" placeholder="對好友說的話..." style="margin-top: 10px;"></textarea>
+      <div class="btn-group">
+        <button class="action-btn btn-primary" onclick="submitReframing()">將這份溫柔送給自己</button>
+        <button class="action-btn" onclick="closeModal('reframingModal')" style="background: var(--inner-bg); color: var(--text-color);">關閉</button>
+      </div>
+      <div id="reframingResult" style="display: none; margin-top: 12px; background: var(--inner-bg); padding: 10px; border-radius: 8px; font-size: 0.85rem; line-height: 1.4; border-left: 3px solid var(--accent-color);"></div>
+    </div>
+  </div>
+
   <footer>
     衛福部安心專線：1925（24小時免費專線）<br>
-    莫蘭迪心靈綠洲 · 溫柔陪伴你的每個當下
+    靜謐心靈綠洲 · 溫柔陪伴你的每個當下
   </footer>
 
   <script>
-    // --- 1. 深淺色模式切換 ---
+    // --- 1. 深淺色模式與深夜偵測 ---
     function initTheme() {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
       updateThemeBtnText(savedTheme);
+
+      const hour = new Date().getHours();
+      if (hour >= 22 || hour < 5) {
+        document.getElementById('nightBanner').style.display = 'block';
+      }
     }
     function toggleTheme() {
       const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -543,11 +633,11 @@
       updateThemeBtnText(newTheme);
     }
     function updateThemeBtnText(theme) {
-      document.getElementById('themeToggle').innerText = theme === 'light' ? '☀️ 莫蘭迪米' : '🌙 莫蘭迪深';
+      document.getElementById('themeToggle').innerText = theme === 'light' ? '☀️ 柔米風' : '🌙 深靜風';
     }
     initTheme();
 
-    // --- 2. 視窗切換與後台密碼 ---
+    // --- 2. 面板切換與後台密碼 ---
     function openView(viewId) {
       document.getElementById('homeDashboard').style.display = 'none';
       document.querySelectorAll('.view-panel').forEach(el => el.classList.remove('active'));
@@ -565,7 +655,7 @@
     function adminLogin() {
       const pwd = prompt("請輸入管理員密碼：");
       if (pwd === "onlyjiacanopen") {
-        alert("驗證成功！歡迎進入後台。");
+        alert("驗證成功！歡迎進入管理控制台。");
         renderAdminTreehole();
         openView('adminView');
       } else if (pwd !== null) {
@@ -573,19 +663,52 @@
       }
     }
 
-    // --- 3. 擴充至 6 大領域專屬心靈小卡庫 ---
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    // --- 3. 音效白噪音 (Web Audio API 合成自然雨聲) ---
+    let audioCtx = null, noiseNode = null, isAudioPlaying = false;
+    function toggleAudio() {
+      const btn = document.getElementById('audioBtn');
+      if (!isAudioPlaying) {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const bufferSize = audioCtx.sampleRate * 2;
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+        noiseNode = audioCtx.createBufferSource();
+        noiseNode.buffer = buffer;
+        noiseNode.loop = true;
+
+        const gain = audioCtx.createGain();
+        gain.gain.value = 0.03; // 極低柔和音量
+
+        noiseNode.connect(gain);
+        gain.connect(audioCtx.destination);
+        noiseNode.start();
+        isAudioPlaying = true;
+        btn.innerText = '🎧 柔和雨聲中';
+      } else {
+        if (noiseNode) noiseNode.stop();
+        isAudioPlaying = false;
+        btn.innerText = '🎧 自然靜音';
+      }
+    }
+
+    // --- 4. 6 大領域專屬靈感卡庫 (替換為 🌟 卡片) ---
     const categoryCards = {
       study: [
-        { quote: "「分階段前進，哪怕今天只理解一個觀念，都是真實且珍貴的累積。」", tip: "💡 轉念建議：將大目標拆解成 15 分鐘的小任務，允許自己慢慢來。" },
+        { quote: "「分階段前進，哪怕今天只理解一個觀念，都是真實且珍貴的累積。」", tip: "💡 轉念建議：將大目標拆解成 15 分鐘小任務，允許自己慢慢來。" },
         { quote: "「分數只代表當下的測試結果，並不定義你的價值與無限可能。」", tip: "💡 轉念建議：專注於你獲得的知識成長，而不是尚未達到的完美。" }
       ],
       work: [
         { quote: "「工作的意義在於支撐生活，而不是消耗掉你所有的生命力與快樂。」", tip: "💡 轉念建議：設立下班後的微儀式，將工作與私人時間明確切割。" },
-        { quote: "「盡力而為即可，你不需要一個人扛下所有的責任與不完美。」", tip: "💡 轉念建議：專注於當下能推進的一小步，適時求助也是一種專業。" }
+        { quote: "「盡力而為即可，你不需要一個人扛下所有的責任與不完美。」", tip: "💡 轉念建議：專注於當下能推進的一小步，適時求助也是專業。」" }
       ],
       family: [
         { quote: "「家人是血緣的連結，但你依然有權利保有屬於自己的心理空間。」", tip: "💡 轉念建議：用溫和但堅定的態度設立心理邊界，不必承接所有情緒。" },
-        { quote: "「接納溝通中的不完美，給彼此一點時間與距離，有時候也是一種愛。」", tip: "💡 轉念建議：試著從旁觀者角度看待分歧，減少過度的情緒牽絆。" }
+        { quote: "「接納溝通中的不完美，給彼此一點時間與距離，也是一種愛。」", tip: "💡 轉念建議：試著從旁觀者角度看待分歧，減少過度的情緒牽絆。" }
       ],
       relationship: [
         { quote: "「你無法決定別人的反應，但你可以決定要給自己的邊界與溫柔。」", tip: "💡 轉念建議：允許他人有他們的課題，先把注意力與愛還给自己。" },
@@ -601,15 +724,7 @@
       ]
     };
 
-    const catNameMap = {
-      study: "課業與考試",
-      work: "職場與工作",
-      family: "家庭與親情",
-      relationship: "人際與感情",
-      future: "未來與生涯",
-      daily: "日常與情緒"
-    };
-
+    const catNameMap = { study: "課業與考試", work: "職場與工作", family: "家庭與親情", relationship: "人際與感情", future: "未來與生涯", daily: "日常與情緒" };
     let selectedCat = 'study';
 
     function selectQuizCategory(catKey) {
@@ -621,10 +736,7 @@
 
     function calculateQuizResult() {
       const form = document.getElementById('quizForm');
-      const q1 = parseInt(form.q1.value);
-      const q2 = parseInt(form.q2.value);
-      const q3 = parseInt(form.q3.value);
-      const totalScore = q1 + q2 + q3;
+      const totalScore = parseInt(form.q1.value) + parseInt(form.q2.value) + parseInt(form.q3.value);
 
       const scoreText = document.getElementById('quizScoreText');
       const adviceText = document.getElementById('quizAdviceText');
@@ -634,13 +746,12 @@
         adviceText.innerText = `你在【${catNameMap[selectedCat]}】方面的狀況維持得不錯！保持當前節奏，隨時記下生活中的小美好。`;
       } else if (totalScore <= 6) {
         scoreText.innerText = "中度壓力 (需多留意)";
-        adviceText.innerText = `【${catNameMap[selectedCat]}】帶給你一些繁雜情緒。建議試試呼吸練習，或使用「壓力拆解」將煩惱劃分。`;
+        adviceText.innerText = `【${catNameMap[selectedCat]}】帶給你一些繁雜情緒。建議試試呼吸練習，或使用「壓力拆解」劃分可控部分。`;
       } else {
         scoreText.innerText = "高度壓力 (需要馬上放鬆)";
         adviceText.innerText = `你在【${catNameMap[selectedCat]}】累積了較高焦慮！請停下手邊事情，給自己 5 分鐘進行深呼吸或感官著陸。`;
       }
 
-      // 抽取該領域專屬小卡
       const cards = categoryCards[selectedCat];
       const card = cards[Math.floor(Math.random() * cards.length)];
 
@@ -659,14 +770,9 @@
       document.getElementById('quizResultArea').style.display = 'none';
     }
 
-    // --- 4. 獨立心靈小卡 ---
-    function getAllCards() {
-      return Object.values(categoryCards).flat();
-    }
-
-    function flipCard(cardInnerId) {
-      document.getElementById(cardInnerId).classList.toggle('flipped');
-    }
+    // --- 5. 獨立靈感卡 (🌟) ---
+    function getAllCards() { return Object.values(categoryCards).flat(); }
+    function flipCard(cardInnerId) { document.getElementById(cardInnerId).classList.toggle('flipped'); }
 
     function drawStandaloneCard() {
       const inner = document.getElementById('standaloneCardInner');
@@ -678,38 +784,29 @@
         inner.classList.add('flipped');
       }
     }
-
     function resetAndDrawCard() {
       const inner = document.getElementById('standaloneCardInner');
       inner.classList.remove('flipped');
       setTimeout(drawStandaloneCard, 400);
     }
 
-    // --- 5. 呼吸調節（4-7-8, 箱型, 4-4） ---
+    // --- 6. 呼吸調節與動態陪伴人數 ---
     let breatheInterval, breatheTimeout;
-
     function switchBreatheMode(mode, btn) {
       document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      
       const descEl = document.getElementById('breatheDesc');
-      if (mode === '478') {
-        descEl.innerText = "4-7-8 呼吸法：吸氣 4 秒 ➔ 憋氣 7 秒 ➔ 吐氣 8 秒，迅速活化副交感神經，舒緩焦慮。";
-      } else if (mode === 'box') {
-        descEl.innerText = "箱型呼吸 (4-4-4-4)：吸氣 4 秒 ➔ 憋氣 4 秒 ➔ 吐氣 4 秒 ➔ 憋氣 4 秒，常用於平復情緒。";
-      } else {
-        descEl.innerText = "4-4 緩和呼吸：平緩吸氣 4 秒與吐氣 4 秒，適合初學者練習。";
-      }
+      if (mode === '478') descEl.innerText = "4-7-8 呼吸法：吸氣 4 秒 ➔ 憋氣 7 秒 ➔ 吐氣 8 秒，活化副交感神經。";
+      else if (mode === 'box') descEl.innerText = "箱型呼吸 (4-4-4-4)：吸氣 4 秒 ➔ 憋氣 4 秒 ➔ 吐氣 4 秒 ➔ 憋氣 4 秒。";
+      else descEl.innerText = "4-4 緩和呼吸：平緩吸氣 4 秒與吐氣 4 秒，適合日常調息。";
       startBreathing(mode);
     }
 
-    function stopBreathing() {
-      clearInterval(breatheInterval);
-      clearTimeout(breatheTimeout);
-    }
+    function stopBreathing() { clearInterval(breatheInterval); clearTimeout(breatheTimeout); }
 
     function startBreathing(mode) {
       stopBreathing();
+      document.getElementById('coBreatheCount').innerText = Math.floor(Math.random() * 8) + 12;
       const textEl = document.getElementById('breatheText');
       const circleEl = document.getElementById('breatheCircle');
 
@@ -717,12 +814,10 @@
         const cycle = () => {
           textEl.innerText = '吸氣 (4秒)';
           circleEl.style.transition = 'transform 4s ease-in-out';
-          circleEl.style.transform = 'scale(1.8)';
-
+          circleEl.style.transform = 'scale(1.7)';
           breatheTimeout = setTimeout(() => {
             textEl.innerText = '憋氣 (7秒)';
             circleEl.style.transition = 'none';
-
             breatheTimeout = setTimeout(() => {
               textEl.innerText = '吐氣 (8秒)';
               circleEl.style.transition = 'transform 8s ease-in-out';
@@ -730,49 +825,39 @@
             }, 7000);
           }, 4000);
         };
-        cycle();
-        breatheInterval = setInterval(cycle, 19000);
-
+        cycle(); breatheInterval = setInterval(cycle, 19000);
       } else if (mode === 'box') {
         const cycle = () => {
           textEl.innerText = '吸氣 (4秒)';
           circleEl.style.transition = 'transform 4s ease-in-out';
-          circleEl.style.transform = 'scale(1.8)';
-
+          circleEl.style.transform = 'scale(1.7)';
           breatheTimeout = setTimeout(() => {
             textEl.innerText = '憋氣 (4秒)';
-            
             breatheTimeout = setTimeout(() => {
               textEl.innerText = '吐氣 (4秒)';
               circleEl.style.transition = 'transform 4s ease-in-out';
               circleEl.style.transform = 'scale(1)';
-
-              breatheTimeout = setTimeout(() => {
-                textEl.innerText = '憋氣 (4秒)';
-              }, 4000);
+              breatheTimeout = setTimeout(() => textEl.innerText = '憋氣 (4秒)', 4000);
             }, 4000);
           }, 4000);
         };
-        cycle();
-        breatheInterval = setInterval(cycle, 16000);
-
+        cycle(); breatheInterval = setInterval(cycle, 16000);
       } else {
         const cycle = () => {
           textEl.innerText = '吸氣 (4秒)';
           circleEl.style.transition = 'transform 4s ease-in-out';
-          circleEl.style.transform = 'scale(1.8)';
+          circleEl.style.transform = 'scale(1.7)';
           breatheTimeout = setTimeout(() => {
             textEl.innerText = '吐氣 (4秒)';
             circleEl.style.transition = 'transform 4s ease-in-out';
             circleEl.style.transform = 'scale(1)';
           }, 4000);
         };
-        cycle();
-        breatheInterval = setInterval(cycle, 8000);
+        cycle(); breatheInterval = setInterval(cycle, 8000);
       }
     }
 
-    // --- 6. 心靈樹洞與相對時間 ---
+    // --- 7. 心靈樹洞與【樹洞守護者】自動溫暖回覆 ---
     let treeholeData = JSON.parse(localStorage.getItem('treeholeData') || '[]');
 
     function getRelativeTime(timestamp) {
@@ -785,22 +870,86 @@
       return `${Math.floor(diffHour / 24)} 天前`;
     }
 
+    function generateGuardianReply(userText) {
+      const gentleReplies = [
+        "聽到了你的聲音。請記得，有情緒是非常正常的，光是能把這些話寫出來，你就已經展現了巨大的勇氣。現在，請深呼吸一口氣，試著把緊繃的肩膀放下吧。",
+        "謝謝你願意把這份沉重分享出來。生活有時真的很吃力，但你已經做得非常好了。給自己一個溫柔的擁抱，今天就先放鬆休息一下吧。",
+        "這段時間辛苦你了。有些事情也許一時無法改變，但你照顧自己的心意是最真實的。這不是你的錯，請溫柔地對待自己。"
+      ];
+      return gentleReplies[Math.floor(Math.random() * gentleReplies.length)];
+    }
+
     function addTreeholeMessage() {
       const input = document.getElementById('treeholeInput');
       if (!input.value.trim()) return;
-      treeholeData.unshift({ id: Date.now(), text: input.value, timestamp: Date.now() });
+
+      const guardianText = generateGuardianReply(input.value);
+      const newMsg = {
+        id: Date.now(),
+        text: input.value,
+        timestamp: Date.now(),
+        hug: 1,
+        love: 1,
+        accompany: 1,
+        guardianReply: guardianText,
+        userReplies: []
+      };
+
+      treeholeData.unshift(newMsg);
       localStorage.setItem('treeholeData', JSON.stringify(treeholeData));
       input.value = '';
       renderTreehole();
+    }
+
+    function reactTreehole(id, type) {
+      const item = treeholeData.find(i => i.id === id);
+      if (item) {
+        item[type] = (item[type] || 0) + 1;
+        localStorage.setItem('treeholeData', JSON.stringify(treeholeData));
+        renderTreehole();
+      }
+    }
+
+    function quickReplyTreehole(id) {
+      const phrases = ["你已經很棒了！", "辛苦你了，給個抱抱！", "這不是你的錯，加油！", "默默在這裡陪著你。"];
+      const choice = prompt(`選擇溫暖快捷回覆：\n1. ${phrases[0]}\n2. ${phrases[1]}\n3. ${phrases[2]}\n4. ${phrases[3]}`);
+      const idx = parseInt(choice) - 1;
+      if (idx >= 0 && idx < phrases.length) {
+        const item = treeholeData.find(i => i.id === id);
+        if (item) {
+          if (!item.userReplies) item.userReplies = [];
+          item.userReplies.push(phrases[idx]);
+          localStorage.setItem('treeholeData', JSON.stringify(treeholeData));
+          renderTreehole();
+        }
+      }
     }
 
     function renderTreehole() {
       const listEl = document.getElementById('treeholeList');
       listEl.innerHTML = treeholeData.map(item => `
         <div class="treehole-item">
-          <div>
-            <div>${escapeHtml(item.text)}</div>
-            <div class="treehole-time">${getRelativeTime(item.timestamp)}</div>
+          <div style="font-size: 0.88rem; line-height: 1.4;">${escapeHtml(item.text)}</div>
+          
+          <div class="guardian-reply">
+            <strong>🛡️ 樹洞守護者：</strong>${item.guardianReply}
+          </div>
+
+          ${item.userReplies && item.userReplies.length > 0 ? `
+            <div style="margin-top: 6px; font-size: 0.78rem; color: var(--primary-color);">
+              ${item.userReplies.map(r => `<div>💬 路過的朋友：${r}</div>`).join('')}
+            </div>
+          ` : ''}
+
+          <div class="treehole-meta">
+            <span>${getRelativeTime(item.timestamp)}</span>
+          </div>
+
+          <div class="treehole-actions">
+            <button class="react-btn" onclick="reactTreehole(${item.id}, 'hug')">🤗 抱抱 (${item.hug || 0})</button>
+            <button class="react-btn" onclick="reactTreehole(${item.id}, 'love')">❤️ 愛心 (${item.love || 0})</button>
+            <button class="react-btn" onclick="reactTreehole(${item.id}, 'accompany')">☕ 陪伴 (${item.accompany || 0})</button>
+            <button class="react-btn" onclick="quickReplyTreehole(${item.id})">💬 回覆溫暖</button>
           </div>
         </div>
       `).join('');
@@ -815,11 +964,11 @@
       }
       adminListEl.innerHTML = treeholeData.map(item => `
         <div class="treehole-item">
-          <div>
-            <div>${escapeHtml(item.text)}</div>
-            <div class="treehole-time">${getRelativeTime(item.timestamp)}</div>
+          <div>${escapeHtml(item.text)}</div>
+          <div class="treehole-meta">
+            <span>${getRelativeTime(item.timestamp)}</span>
+            <button class="action-btn btn-danger" style="padding: 2px 6px; font-size: 0.72rem;" onclick="deleteSingleTreehole(${item.id})">刪除</button>
           </div>
-          <button class="admin-item-del-btn" onclick="deleteSingleTreehole(${item.id})">刪除</button>
         </div>
       `).join('');
     }
@@ -828,8 +977,7 @@
       if (confirm("確定要刪除這條留言嗎？")) {
         treeholeData = treeholeData.filter(item => item.id !== id);
         localStorage.setItem('treeholeData', JSON.stringify(treeholeData));
-        renderTreehole();
-        renderAdminTreehole();
+        renderTreehole(); renderAdminTreehole();
       }
     }
 
@@ -837,8 +985,7 @@
       if (confirm("⚠️ 警告：確定要清空所有樹洞留言嗎？此操作無法恢復！")) {
         treeholeData = [];
         localStorage.setItem('treeholeData', JSON.stringify(treeholeData));
-        renderTreehole();
-        renderAdminTreehole();
+        renderTreehole(); renderAdminTreehole();
       }
     }
 
@@ -846,20 +993,13 @@
       const input = document.getElementById('treeholeInput');
       if (!input.value.trim()) return;
       input.classList.add('shredding');
-      setTimeout(() => {
-        input.value = '';
-        input.classList.remove('shredding');
-      }, 800);
+      setTimeout(() => { input.value = ''; input.classList.remove('shredding'); }, 800);
     }
 
-    function escapeHtml(text) {
-      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    }
-
-    setInterval(renderTreehole, 30000);
+    function escapeHtml(text) { return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
     renderTreehole();
 
-    // --- 7. CBT 壓力拆解 ---
+    // --- 8. CBT 壓力拆解 & 換位思考 ---
     function addCbtItem() {
       const input = document.getElementById('cbtInput');
       const type = document.getElementById('cbtType').value;
@@ -869,24 +1009,110 @@
       item.className = 'cbt-item';
       item.innerText = input.value;
 
-      if (type === 'controllable') {
-        document.getElementById('controllableList').appendChild(item);
-      } else {
-        document.getElementById('uncontrollableList').appendChild(item);
-      }
+      if (type === 'controllable') document.getElementById('controllableList').appendChild(item);
+      else document.getElementById('uncontrollableList').appendChild(item);
       input.value = '';
     }
 
-    // --- 8. 感官著陸 ---
+    function submitReframing() {
+      const val = document.getElementById('reframingInput').value.trim();
+      if (!val) return;
+      const resEl = document.getElementById('reframingResult');
+      resEl.style.display = 'block';
+      resEl.innerHTML = `<strong>✨ 請把這份溫柔留給自己：</strong><br>「${escapeHtml(val)}」`;
+    }
+
+    // --- 9. 煩惱延後箱 ---
+    let sealedWorries = JSON.parse(localStorage.getItem('sealedWorries') || '[]');
+    function sealWorry() {
+      const input = document.getElementById('worryDelayInput');
+      const timeVal = document.getElementById('delayTimeSelect').value;
+      if (!input.value.trim()) return;
+
+      sealedWorries.unshift({ text: input.value, time: timeVal });
+      localStorage.setItem('sealedWorries', JSON.stringify(sealedWorries));
+      input.value = '';
+      renderSealedWorries();
+      alert("🔒 煩惱已安全封存！請放心回歸當下生活，時間到了再來處理。");
+    }
+
+    function renderSealedWorries() {
+      const list = document.getElementById('sealedList');
+      if (sealedWorries.length === 0) { list.innerHTML = ''; return; }
+      list.innerHTML = `<h4 style="font-size: 0.85rem; margin-bottom: 6px;">🔒 已封存的煩惱：</h4>` +
+        sealedWorries.map(w => `
+          <div style="background: var(--inner-bg); padding: 8px 10px; border-radius: 8px; margin-bottom: 6px; font-size: 0.82rem;">
+            <div>${escapeHtml(w.text)}</div>
+            <div style="color: var(--primary-color); font-size: 0.75rem; margin-top: 2px;">⏰ 約定面對時間：${w.time}</div>
+          </div>
+        `).join('');
+    }
+    renderSealedWorries();
+
+    // --- 10. 微光漂流瓶 ---
+    const presetBottles = [
+      "「無論今天過得如何，你都已經非常努力了，晚安，明天會是美好的一天。」",
+      "「別對自己太嚴苛，允許自己偶爾停下來，這不是退步，而是蓄力。」",
+      "「宇宙比你想像的更愛你，請繼續溫柔地對待自己喔！」"
+    ];
+    let customBottles = JSON.parse(localStorage.getItem('customBottles') || '[]');
+
+    function drawBottle() {
+      const all = [...presetBottles, ...customBottles];
+      const picked = all[Math.floor(Math.random() * all.length)];
+      document.getElementById('bottleContentText').innerText = picked;
+      document.getElementById('bottleDisplay').style.display = 'block';
+    }
+
+    function toggleBottleSendForm() {
+      const el = document.getElementById('bottleSendArea');
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function sendBottle() {
+      const val = document.getElementById('bottleInput').value.trim();
+      if (!val) return;
+      customBottles.push(`「${val}」`);
+      localStorage.setItem('customBottles', JSON.stringify(customBottles));
+      document.getElementById('bottleInput').value = '';
+      alert("🌊 漂流瓶已投遞！謝謝你傳播這份溫暖。");
+      document.getElementById('bottleSendArea').style.display = 'none';
+    }
+
+    // --- 11. 今日打卡與微成就 ---
+    let savedAchievements = JSON.parse(localStorage.getItem('microAchievements') || '[]');
+    function setMood(moodStr) { alert(`已記錄今日心情氣象：${moodStr}`); }
+
+    function saveMicroAchievement() {
+      const input = document.getElementById('microAchieveInput');
+      if (!input.value.trim()) return;
+      savedAchievements.unshift({ text: input.value, date: new Date().toLocaleDateString() });
+      localStorage.setItem('microAchievements', JSON.stringify(savedAchievements));
+      input.value = '';
+      renderAchievements();
+    }
+
+    function renderAchievements() {
+      const list = document.getElementById('achieveList');
+      if (savedAchievements.length === 0) return;
+      list.innerHTML = `<h4 style="font-size: 0.82rem; margin-bottom: 6px;">🌱 累積的微小成就：</h4>` +
+        savedAchievements.map(a => `
+          <div style="background: var(--inner-bg); padding: 6px 10px; border-radius: 8px; margin-bottom: 5px; font-size: 0.8rem;">
+            <span>${a.date} - ${escapeHtml(a.text)}</span>
+          </div>
+        `).join('');
+    }
+    renderAchievements();
+
+    // --- 12. 感官著陸 ---
     const groundingSteps = [
-      { num: 5, title: "看 (See)", desc: "環顧四周，找出 5 個藍色或棕色的物品，或是你以前沒注意到的細節。" },
+      { num: 5, title: "看 (See)", desc: "環顧四周，找出 5 個藍色或木質物品，或是未曾注意到的細節。" },
       { num: 4, title: "觸 (Touch)", desc: "感受 4 種摸得到的質感（例如衣服布料、冰涼桌面、手心的溫度）。" },
       { num: 3, title: "聽 (Listen)", desc: "閉上眼，仔細聽周圍 3 種聲音（如風扇聲、遠處車聲、呼吸聲）。" },
       { num: 2, title: "嗅 (Smell)", desc: "注意到 2 種氣味（空氣的味道、洗衣精香味）。" },
       { num: 1, title: "味 (Taste)", desc: "感受 1 種味覺（口中的餘味，或是喝一口溫水）。" }
     ];
     let stepIdx = 0;
-
     function nextGroundingStep() {
       stepIdx = (stepIdx + 1) % groundingSteps.length;
       const step = groundingSteps[stepIdx];
