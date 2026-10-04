@@ -251,10 +251,18 @@
     .treehole-item { background: var(--inner-bg); padding: 12px 14px; border-radius: 12px; margin-bottom: 12px; border-left: 4px solid var(--primary-color); }
     .guardian-reply { background: var(--card-bg); border-radius: 8px; padding: 10px; margin-top: 8px; font-size: 0.82rem; border: 1px solid var(--primary-color); }
 
-    /* RWD 適應 */
+    /* 📱 RWD 手機版排列（將右側主要內容置頂，左側選單放底部） */
     @media (max-width: 899px) {
-      .app-container { flex-direction: column; }
-      .sidebar { width: 100%; }
+      .app-container { 
+        flex-direction: column; 
+      }
+      .main-content { 
+        order: 1; /* 手機版：主要內容在最上方 */
+      }
+      .sidebar { 
+        width: 100%; 
+        order: 2; /* 手機版：側邊欄置於最下方 */
+      }
     }
   </style>
 </head>
@@ -262,7 +270,7 @@
 
   <div class="app-container" id="appContainer">
     
-    <!-- 左側邊欄 -->
+    <!-- 左側邊欄 (手機版會顯示在下方) -->
     <aside class="sidebar">
       <div class="brand-title">
         <h1>心靈綠洲</h1>
@@ -294,7 +302,7 @@
       </div>
     </aside>
 
-    <!-- 右側主內容區 -->
+    <!-- 右側主內容區 (手機版會顯示在最上方) -->
     <main class="main-content">
 
       <!-- 夜間關懷提醒 -->
