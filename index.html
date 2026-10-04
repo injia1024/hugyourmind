@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>心靈綠洲 - 紓壓與沉浸式放鬆空間</title>
+  <style>
+    /* --- 全域設定與深色莫蘭迪主題 --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #1a202c;
+      color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: #81e6d9;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #a0aec0;
+      font-size: 0.95rem;
+    }
+
+    /* --- 分頁導覽列 --- */
+    nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      background: #2d3748;
+      color: #cbd5e0;
+      border: 1px solid #4a5568;
+      padding: 10px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: #319795;
+      color: #ffffff;
+      border-color: #319795;
+      box-shadow: 0 4px 12px rgba(49, 151, 149, 0.3);
+    }
+
+    /* --- 主要內容容器 --- */
+    main {
+      width: 100%;
+      max-width: 650px;
+      background: #2d3748;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- 1. 呼吸放鬆模式 --- */
+    .breathe-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+    }
+
+    .breathe-circle-wrap {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .breathe-circle {
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, #81e6d9 0%, #319795 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 25px rgba(129, 230, 217, 0.4);
+      animation: breatheAnimation 8s infinite ease-in-out;
+    }
+
+    .breathe-text {
+      position: absolute;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+
+    @keyframes breatheAnimation {
+      0% { transform: scale(1); box-shadow: 0 0 15px rgba(129, 230, 217, 0.3); }
+      50% { transform: scale(1.8); box-shadow: 0 0 45px rgba(129, 230, 217, 0.8); }
+      100% { transform: scale(1); box-shadow: 0 0 15px rgba(129, 230, 217, 0.3); }
+    }
+
+    /* --- 2. 壓力檢測 --- */
+    .stress-slider-box {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .slider {
+      width: 100%;
+      margin: 20px 0;
+      accent-color: #319795;
+    }
+
+    .stress-score {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #81e6d9;
+    }
+
+    .stress-advice {
+      margin-top: 15px;
+      padding: 15px;
+      background: #1a202c;
+      border-radius: 8px;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    /* --- 3. 心靈樹洞與粉碎機 --- */
+    textarea {
+      width: 100%;
+      height: 100px;
+      background: #1a202c;
+      border: 1px solid #4a5568;
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      resize: none;
+      font-size: 1rem;
+      transition: all 0.8s ease;
+    }
+
+    textarea.shredding {
+      opacity: 0;
+      transform: scale(0.8);
+      filter: blur(10px);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+
+    .btn-primary { background: #319795; color: white; }
+    .btn-primary:hover { background: #2c7a7b; }
+    .btn-danger { background: #e53e3e; color: white; }
+    .btn-danger:hover { background: #c53030; }
+
+    .treehole-list {
+      margin-top: 20px;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .treehole-item {
+      background: #1a202c;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border-left: 4px solid #319795;
+    }
+
+    .treehole-time {
+      font-size: 0.75rem;
+      color: #718096;
+      margin-top: 5px;
+    }
+
+    /* --- 4. 壓力拆解盒 --- */
+    .cbt-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .cbt-column {
+      background: #1a202c;
+      padding: 12px;
+      border-radius: 8px;
+      min-height: 150px;
+    }
+
+    .cbt-column h4 {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .cbt-controllable h4 { color: #68d391; }
+    .cbt-uncontrollable h4 { color: #f6ad55; }
+
+    .cbt-item {
+      background: #2d3748;
+      padding: 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+    }
+
+    /* --- 5. 5-4-3-2-1 感官著陸 --- */
+    .grounding-card {
+      background: #1a202c;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .grounding-step-num {
+      font-size: 2rem;
+      color: #81e6d9;
+      font-weight: bold;
+    }
+
+    /* 頁尾 */
+    footer {
+      margin-top: auto;
+      padding-top: 20px;
+      font-size: 0.8rem;
+      color: #718096;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>心靈綠洲</h1>
+    <p>給自己幾分鐘的時間，安放情緒、找回平靜</p>
+  </header>
+
+  <!-- 功能選單 -->
+  <nav>
+    <button class="tab-btn active" onclick="switchTab('breathe')">🫁 呼吸調節</button>
+    <button class="tab-btn" onclick="switchTab('stress')">📊 壓力評估</button>
+    <button class="tab-btn" onclick="switchTab('treehole')">🪵 心靈樹洞</button>
+    <button class="tab-btn" onclick="switchTab('cbt')">⚖️ 壓力拆解</button>
+    <button class="tab-btn" onclick="switchTab('grounding')">🌿 感官著陸</button>
+  </nav>
+
+  <main>
+    <!-- 1. 呼吸放頌 -->
+    <section id="breathe" class="tab-content active">
+      <div class="breathe-box">
+        <div class="breathe-circle-wrap">
+          <div class="breathe-circle"></div>
+          <div class="breathe-text" id="breatheText">吸氣...</div>
+        </div>
+        <p style="margin-top: 30px; color: #a0aec0; font-size: 0.9rem;">跟隨圓圈的放縮進行深呼吸 (吸氣 4 秒 / 吐氣 4 秒)</p>
+      </div>
+    </section>
+
+    <!-- 2. 壓力評估 -->
+    <section id="stress" class="tab-content">
+      <div class="stress-slider-box">
+        <h3>你現在感受到的壓力有多大？</h3>
+        <input type="range" min="1" max="10" value="5" class="slider" id="stressSlider" oninput="updateStressDisplay(this.value)">
+        <div class="stress-score"><span id="stressValue">5</span> / 10</div>
+        <div class="stress-advice" id="stressAdvice">點擊上方分頁，選擇最適合你現在狀態的練習。</div>
+      </div>
+    </section>
+
+    <!-- 3. 心靈樹洞與粉碎機 -->
+    <section id="treehole" class="tab-content">
+      <h3>寫下心中的煩惱或情緒...</h3>
+      <textarea id="treeholeInput" placeholder="在這裡寫下任何讓你焦慮或難過的事..."></textarea>
+      <div class="btn-group">
+        <button class="action-btn btn-primary" onclick="addTreeholeMessage()">傾訴並留存於樹洞</button>
+        <button class="action-btn btn-danger" onclick="shredWorry()">🔥 銷毀煩惱（煙消雲散）</button>
+      </div>
+
+      <div class="treehole-list" id="treeholeList">
+        <!-- 動態渲染樹洞留言 -->
+      </div>
+    </section>
+
+    <!-- 4. 壓力拆解盒 (CBT) -->
+    <section id="cbt" class="tab-content">
+      <h3>將煩惱分類：區分可控與不可控</h3>
+      <div style="display: flex; gap: 8px; margin-top: 10px;">
+        <input type="text" id="cbtInput" placeholder="寫下一件具體的煩惱..." style="flex:1; padding: 8px; border-radius: 6px; border: 1px solid #4a5568; background: #1a202c; color: #fff;">
+        <select id="cbtType" style="padding: 8px; border-radius: 6px; background: #1a202c; color: #fff; border: 1px solid #4a5568;">
+          <option value="controllable">我能掌控的</option>
+          <option value="uncontrollable">我無法掌控的</option>
+        </select>
+        <button class="action-btn btn-primary" onclick="addCbtItem()" style="flex:0 0 70px;">加入</button>
+      </div>
+
+      <div class="cbt-container">
+        <div class="cbt-column cbt-controllable">
+          <h4>🌱 我能掌控的 (專注行動)</h4>
+          <div id="controllableList"></div>
+        </div>
+        <div class="cbt-column cbt-uncontrollable">
+          <h4>🍃 我無法掌控的 (練習放下)</h4>
+          <div id="uncontrollableList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 感官著陸 (Grounding) -->
+    <section id="grounding" class="tab-content">
+      <div class="grounding-card">
+        <div class="grounding-step-num" id="groundingNum">5</div>
+        <h3 id="groundingTitle" style="margin: 10px 0;">看 (See)</h3>
+        <p id="groundingDesc" style="color: #a0aec0; margin-bottom: 20px;">環顧四周，找出 5 個藍色的物品，或你以前沒注意到的細節。</p>
+        <button class="action-btn btn-primary" onclick="nextGroundingStep()">下一步</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    如需即時心理諮詢協助，可撥打衛福部安心專線：1925（依舊愛我）<br>
+    你的情緒在這裡是被安全的接納的。
+  </footer>
+
+  <script>
+    // --- 1. 分頁切換功能 ---
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    // --- 2. 呼吸法計時同步 (4秒吸 / 4秒吐) ---
+    const breatheText = document.getElementById('breatheText');
+    setInterval(() => {
+      breatheText.innerText = '吸氣...';
+      setTimeout(() => {
+        breatheText.innerText = '吐氣...';
+      }, 4000);
+    }, 8000);
+
+    // --- 3. 壓力評估與建議 ---
+    function updateStressDisplay(val) {
+      document.getElementById('stressValue').innerText = val;
+      const adviceBox = document.getElementById('stressAdvice');
+      if (val >= 8) {
+        adviceBox.innerHTML = "🚨 <strong>壓力指數偏高：</strong> 你的腦袋可能正處於過載狀態。建議先不要思考，切換至 <strong>[🫁 呼吸調節]</strong> 或 <strong>[🌿 感官著陸]</strong> 幫助神經系統平靜。";
+      } else if (val >= 5) {
+        adviceBox.innerHTML = "⚠️ <strong>中度壓力：</strong> 事情可能有些雜亂。試試看 <strong>[⚖️ 壓力拆解]</strong> 來劃分可控與不可控的事物，或是到 <strong>[🪵 心靈樹洞]</strong> 抒發情緒。";
+      } else {
+        adviceBox.innerHTML = "✨ <strong>狀態良好：</strong> 保持這個節奏，可以去樹洞寫下今日值得感恩的小事，或單純聆聽呼吸。";
+      }
+    }
+
+    // --- 4. 心靈樹洞 (包含動態相對時間計算 + 粉碎功能) ---
+    let treeholeData = [];
+
+    // 計算相對時間的關鍵函數
+    function getRelativeTime(timestamp) {
+      const now = Date.now();
+      const diffInSec = Math.floor((now - timestamp) / 1000);
+
+      if (diffInSec < 60) return '剛剛';
+      const diffInMin = Math.floor(diffInSec / 60);
+      if (diffInMin < 60) return `${diffInMin} 分鐘前`;
+      const diffInHour = Math.floor(diffInMin / 60);
+      if (diffInHour < 24) return `${diffInHour} 小時前`;
+      const diffInDay = Math.floor(diffInHour / 24);
+      return `${diffInDay} 天前`;
+    }
+
+    function addTreeholeMessage() {
+      const input = document.getElementById('treeholeInput');
+      if (!input.value.trim()) return;
+
+      treeholeData.unshift({
+        text: input.value,
+        timestamp: Date.now()
+      });
+
+      input.value = '';
+      renderTreehole();
+    }
+
+    function renderTreehole() {
+      const listEl = document.getElementById('treeholeList');
+      listEl.innerHTML = treeholeData.map(item => `
+        <div class="treehole-item">
+          <div>${escapeHtml(item.text)}</div>
+          <div class="treehole-time">${getRelativeTime(item.timestamp)}</div>
+        </div>
+      `).join('');
+    }
+
+    // 每 30 秒自動刷新一次樹洞的時間文字，確保時間會持續推進！
+    setInterval(renderTreehole, 30000);
+
+    // 銷毀/粉碎煩惱動畫
+    function shredWorry() {
+      const input = document.getElementById('treeholeInput');
+      if (!input.value.trim()) return;
+
+      input.classList.add('shredding');
+      setTimeout(() => {
+        input.value = '';
+        input.classList.remove('shredding');
+      }, 800);
+    }
+
+    // XSS 防護輔助函數
+    function escapeHtml(text) {
+      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // --- 5. 壓力拆解盒 (CBT) ---
+    function addCbtItem() {
+      const input = document.getElementById('cbtInput');
+      const type = document.getElementById('cbtType').value;
+      if (!input.value.trim()) return;
+
+      const item = document.createElement('div');
+      item.className = 'cbt-item';
+      item.innerText = input.value;
+
+      if (type === 'controllable') {
+        document.getElementById('controllableList').appendChild(item);
+      } else {
+        document.getElementById('uncontrollableList').appendChild(item);
+      }
+
+      input.value = '';
+    }
+
+    // --- 6. 5-4-3-2-1 感官著陸 ---
+    const groundingSteps = [
+      { num: 5, title: "看 (See)", desc: "環顧四周，找出 5 個藍色的物品，或你以前沒注意到的細節。" },
+      { num: 4, title: "觸 (Touch)", desc: "感受 4 種摸得到的質感（例如衣服布料、冰涼的桌面、自己的手心）。" },
+      { num: 3, title: "聽 (Listen)", desc: "閉上記眼睛，仔細聽周圍 3 種細微聲音（如風扇聲、遠處車聲、自己的呼吸）。" },
+      { num: 2, title: "嗅 (Smell)", desc: "注意到 2 種氣味（空氣的味道、衣服上的香味或咖啡香）。" },
+      { num: 1, title: "味 (Taste)", desc: "感受 1 種味覺（口中的餘味，或是喝一口溫水）。" }
+    ];
+    let currentStep = 0;
+
+    function nextGroundingStep() {
+      currentStep = (currentStep + 1) % groundingSteps.length;
+      const step = groundingSteps[currentStep];
+      document.getElementById('groundingNum').innerText = step.num;
+      document.getElementById('groundingTitle').innerText = step.title;
+      document.getElementById('groundingDesc').innerText = step.desc;
+    }
+  </script>
+</body>
+</html>
